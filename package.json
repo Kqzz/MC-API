@@ -1,0 +1,51 @@
+{
+    "name": "mc-api",
+    "version": "1.0.0",
+    "description": "Minecraft API made by kqzz :D",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "author": "Kqzz",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.21.1",
+        "cheerio": "^1.0.0-rc.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "got": "^11.8.1",
+        "hooman": "^1.2.6"
+    },
+    "devDependencies": {
+        "eslint": "^7.19.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.22.1",
+        "nodemon": "^2.0.7"
+    },
+    "eslintConfig": {
+        "extends": "airbnb-base",
+        "env": {
+            "es6": true,
+            "browser": true
+        },
+        "rules": {
+            "brace-style": [
+                "error",
+                "stroustrup"
+            ],
+            "comma-dangle": [
+                "error",
+                "never"
+            ],
+            "no-unused-vars": [
+                "warn"
+            ],
+            "no-var": [
+                "off"
+            ],
+            "one-var": [
+                "off"
+            ]
+        }
+    }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <!-- META -->
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCsniperPY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="./assets/favicon-32x32.png">
+	<meta property="og:title" content="MCsniperPY" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://mcsniperpy.github.io/" />
+	<meta property="og:image" content="./img/old-logo.png"/>
+	<meta property="og:description" content="A fast, free, and async Python name sniper!"/>
+	<meta name="theme-color" content="#4188C7">
+  <!-- Favicon -->
+  <link rel="icon" href="img/favicon.png" sizes="32x32" type="image/png" />
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" />
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!--  Custom CSS -->
+  <link rel="stylesheet" href="css/homepage.css" />
+</head>
+
+<body>
+  <script>
+    AOS.init();
+  </script>
+
+  <div class="parallax">
+    <!-- Parallaxing background image -->
+    <div class="parallax-layer parallax-background-image">
+      <div class="image-receiver"></div>
+    </div>
+
+    <!-- Parallaxing header-->
+    <div class="jumbotron jumbotron-fluid" id="banner">
+      <div class="container text-center text-md-center">
+        <header>
+          <div class="row justify-content-between">
+            <div class="col-2">
+              <a href="index.html">
+                <img src="img/logo.png" alt="logo" id="logo" />
+              </a>
+            </div>
+          </div>
+          <h1 class="display-3 text-white font-weight-bold my-2">MCsniperPY</h1>
+          <h4 class="text-white my-4">A Minecraft name sniper written in Python</h4>
+          <a href="https://github.com/MCsniperPY/MCsniperPY"
+            class="btn my-2 mx-2 font-weight-bold cta cta-white" target="_blank">
+            Get it Now
+          </a>
+          <a href="https://github.com/MCsniperPY/MCsniperPY"
+            class="btn my-2 mx-2 font-weight-bold cta cta-white-outline" target="_blank">
+            View on GitHub <i class="fab fa-lg fa-github float-right icon-in-button"></i>
+          </a>
+        </header>
+      </div>
+    </div>
+
+
+    <!-- Rest of the website -->
+    <div class="parallax-content-layer">
+      <!-- Features -->
+      <div class="container my-5 py-2">
+        <h2 class="text-center font-weight-bold my-5">Features</h2>
+        <div class="row">
+          <div class="col-md-4 text-center" data-aos="fade-up" data-aos-duration="400">
+            <i class="mx-auto my-5 fa fa-6x fa-unlock-alt" aria-hidden="true"/></i>
+            <h4>Open source</h4>
+            <p>MCsniperPY is open source, meaning you can see all the code powering the sniper.</p>
+          </div>
+          <div class="col-md-4 text-center" data-aos="fade-up" data-aos-duration="900">
+            <i class="mx-auto my-5 fa fa-fast-forward fa-6x" aria-hidden="true"/> </i>
+            <h4>Fast</h4>
+            <p>MCsniperPY is highly optimized so it can keep up with the competition.</p>
+          </div>
+          <div class="col-md-4 text-center" data-aos="fade-up" data-aos-duration="1400">
+            <i class="mx-auto my-5 fa fa-handshake fa-6x" aria-hidden="true"/></i>
+            <h4>Trusted</h4>
+            <p>With over 2,000 successful snipes, MCsniperPY is one of the most trusted snipers out there. </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Information -->
+      <div class="jumbotron jumbotron-fluid info" id="discord">
+        <div class="container my-5" >
+          <div class="row justify-content-between text-center text-md-left">
+            <div class="col-md-6">
+              <h2 class="font-weight-bold">Join the community</h2>
+              <p class="my-4">Join the MCsniperPY Discord server to talk to other people interested in Minecraft usernames!</p>
+              <a href="https://mcsniperpy.github.io/discord" class="btn my-3 cta cta-darkblue"
+                target="_blank">Discord<i class="fab fa-discord fa-lg icon-in-button" aria-hidden="true"></i></a>
+            </div>
+            <div class="col-md-6 align-self-center">
+              <img src="img/preview.gif" alt="Laptop Demo" class="mx-auto d-block" data-aos="fade-left" data-aos-duration="900" style="border-radius:10px;"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jumbotron jumbotron-fluid info" id="docs">
+        <div class="container my-5">
+          <div class="row justify-content-between text-center text-md-left">
+            <div class="col-md-6 align-self-center">
+              <i class="fa fa-book fa-10x" aria-hidden="true" data-aos="fade-right" data-aos-duration="1200"></i>
+            </div>
+            <div class="col-md-6">
+              <h2 class="font-weight-bold">Documentation</h2>
+              <p class="my-4">Read the MCsniperPY documentation to learn everything you can about name sniping with MCsniperPY.</p>
+              <a href="#" class="btn my-3 cta cta-darkblue">Coming Soon™</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Copyright -->
+      <div class="jumbotron jumbotron-fluid" id="copyright">
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-md-6 text-white align-self-center text-center text-md-left my-2">📝 This webpage is a modified version of the <a
+            href="https://github.com/files-community/Files">Files</a> website </div>
+            <div class="col-md-6 align-self-center text-center text-md-right my-2" id="social-media">
+              <a href="https://github.com/MCsniperPY" class="d-inline-block text-center ml-2">
+                <i class="fab fa-github" aria-hidden="true"></i>
+              </a>
+              <a href="https://mcsniperpy.github.io/discord" class="d-inline-block text-center ml-2">
+                <i class="fab fa-discord" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
