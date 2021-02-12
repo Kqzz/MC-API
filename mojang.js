@@ -7,7 +7,6 @@ exports.usernameToUUID = async (username) => {
       console.log("err!");
       //   response.data.id = undefined;
     });
-  // console.log(response.data);
   let legacy = false;
   let demo = false;
 

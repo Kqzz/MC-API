@@ -15,7 +15,6 @@ router.get("/user/:username", async (req, res) => {
   }
 
   const username_data = await mojang.usernameToUUID(req.params.username);
-  console.log(username_data)
   data.uuid = username_data.uuid
   data.username = username_data.username
   data.legacy = username_data.legacy
