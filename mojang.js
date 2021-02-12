@@ -18,9 +18,12 @@ exports.usernameToUUID = async (username) => {
     demo = true;
   }
 
-  console.log(response.data)
-
-  return {uuid: response.data.id, username: response.data.name, legacy: legacy, demo: demo};
+  return {
+    uuid: response.data.id,
+    username: response.data.name,
+    legacy: legacy,
+    demo: demo,
+  };
 };
 
 exports.nameHistory = async (uuid) => {
