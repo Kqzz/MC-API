@@ -7,8 +7,20 @@ exports.usernameToUUID = async (username) => {
       console.log("err!");
       //   response.data.id = undefined;
     });
-  console.log(response.data);
-  return [response.data.id, response.data.username];
+  // console.log(response.data);
+  let legacy = false;
+  let demo = false;
+
+  if (response.data.legacy != undefined) {
+    legacy = true;
+  }
+  if (response.data.demo != undefined) {
+    demo = true;
+  }
+
+  console.log(response.data)
+
+  return {uuid: response.data.id, username: response.data.name, legacy: legacy, demo: demo};
 };
 
 exports.nameHistory = async (uuid) => {
@@ -27,7 +39,11 @@ exports.textures = async (uuid) => {
     console.log(err);
   });
 
-  let ret_data = {properties: data.data.properties}
+  let ret_data = { skin: data.data.properties };
+
+  const skin_url = JSON.parse(
+    Buffer.from(ret_data.skin[0].value, "base64").toString("utf-8")
+  ).textures.SKIN.url;
 
   return ret_data;
 };

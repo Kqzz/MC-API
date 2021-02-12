@@ -52,9 +52,6 @@ exports.userStats = async (identifier) => {
       } else {
         data.accounts[acc_type] = link_or_void;
       }
-
-      console.log(acc_type);
-      console.log(link_or_void);
     });
 
   data.skins = {};
