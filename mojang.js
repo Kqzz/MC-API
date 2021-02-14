@@ -1,5 +1,7 @@
 const axios = require("axios");
 
+const cape_uuids = {};
+
 exports.usernameToUUID = async (username) => {
   const response = await axios
     .get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
@@ -41,11 +43,33 @@ exports.textures = async (uuid) => {
     console.log(err);
   });
 
-  let ret_data = { skin: data.data.properties };
+  console.log(data.data);
 
-  const skin_url = JSON.parse(
-    Buffer.from(ret_data.skin[0].value, "base64").toString("utf-8")
-  ).textures.SKIN.url;
+  let ret_data = { skin: {}, cape: {} };
+
+  const decoded_value = JSON.parse(
+    Buffer.from(data.data.properties[0].value, "base64").toString("utf-8")
+  );
+
+  if (decoded_value.textures.SKIN.metadata === undefined) {
+    ret_data.skin.custom = false;
+    ret_data.skin.slim = false;
+  } else {
+    ret_data.skin.custom = true;
+    ret_data.skin.slim =
+      decoded_value.textures.SKIN.metadata.model === "slim" ? true : false;
+  }
+
+  ret_data.skin.url = decoded_value.textures.SKIN.url;
+
+  try {
+    ret_data.cape.url = decoded_value.textures.CAPE.url;
+    ret_data.cape.cape = true;
+  } catch {
+    ret_data.cape.cape = false;
+    ret_data.cape.url = '';
+  }
+  
 
   return ret_data;
 };

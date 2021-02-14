@@ -10,7 +10,7 @@ const namemcAPI = require("./namemcApi");
 const app = express();
 const port = 3000;
 
-app.set("json spaces", 4);
+app.set("json spaces", 0);
 app.use("/api/mojang", mojangAPI); // mojang api
 app.use("/api/namemc", namemcAPI);
 
