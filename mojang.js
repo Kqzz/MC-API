@@ -43,7 +43,6 @@ exports.textures = async (uuid) => {
     console.log(err);
   });
 
-  console.log(data.data);
 
   let ret_data = { skin: {}, cape: {} };
 
