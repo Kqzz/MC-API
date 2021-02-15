@@ -11,7 +11,7 @@ The MC API is meant to be easy to use, so I'll be documenting the **entire** res
 
 This is the main url path and provides information (solely from mojang) on a user. If you would like more information (namemc data and optifine info) then you can pass in the `optifine=true` and/or the `namemc=true` parameters (those are optional, if you don't provide them it will be the same as if you set both to false).
 
-```json
+```
 {
    "uuid": str,  // The specified user's UUID
    "username": str,  // The specified user's username (may differ from url parameter in capitalization and will always be the exact username the specified user has)
