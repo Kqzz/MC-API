@@ -79,3 +79,18 @@ exports.userStats = async (identifier) => {
 
   return data;
 };
+
+exports.droptime = async (username) => {
+  const url = `https://namemc.com/name/${username}`;
+  const resp = await axios.get(url);
+  const $ = cheerio.load(resp.data);
+
+  let time = $("#availability-time").attr("datetime");
+  console.log(time)
+  if (time === undefined) {
+    time = { error: `${username} is not dropping` };
+  } else {
+    time = { droptime: Date.parse(time.replace('.000', '')) / 1000 };
+  }
+  return time;
+};

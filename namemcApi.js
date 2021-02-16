@@ -9,4 +9,9 @@ router.get("/user/:identifier", async (req, res) => {
     res.send(data)
 });
 
+router.get("/droptime/:username", async (req, res) => {
+    data = await namemc.droptime(req.params.username);
+    res.status(200).send(data)
+})
+
 module.exports = router;
