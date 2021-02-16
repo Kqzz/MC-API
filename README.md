@@ -80,3 +80,57 @@ This is the main url path and provides information (solely from mojang) on a use
 }
 ```
 
+### `/api/namemc/user/USERNAMEorUUID`
+
+To be honest, this route is fairly useless. I recommend using the Mojang route and passing in the `namemc=true` [url query string](https://en.wikipedia.org/wiki/Query_string).
+
+```
+{ // ONLY PRESENT IF `namemc=true` is passed as a url query string (https://en.wikipedia.org/wiki/Query_string)
+      "username": str,  // username of the account (it's a duplicate of the prev data) // TODO: remove dupe data if it's not a /api/namec url
+      "uuid":str,  // uuid of the specified account
+      "location":str,  // location of the specified account https://imgur.com/a/D0jgisi
+      "views":int,  // Profile views
+      "accounts":{
+        "discord": str,  // only present if linked
+        "facebook": str,  // only present if linked
+        "github": str,  // only present if linked
+        "instagram": str,  // only present if linked
+        "reddit": str,  // only present if linked
+        "snapchat": str,  // only present if linked
+        "soundcloud": str,  // only present if linked
+        "steam": str,  // only present if linked
+        "telegram": str,  // only present if linked
+        "twitch": str,  // only present if linked
+        "twitter": str,  // only present if linked
+        "youtube": str  // only present if linked
+      }, // Linked accounts (https://imgur.com/a/D0jgisi) NOTE: these accounts require no verification so one could link false accounts
+      "skins":{  // NAMEMC previous skins. TODO: make it so you can exclude this since it can be HUGE.
+         "skin_ids":[  // NAMEMC IDS of the skins
+            "74b89bbd8b071fab"
+         ],
+         "texture_urls":[
+            "https://namemc.com/texture/74b89bbd8b071fab.png"  // NAMEMC links to the skin textures.
+         ]
+}
+```
+
+### `/api/namemc/droptime/name`
+
+Get's the droptime of a username and returns the Unix timestamp of it.
+
+```
+{
+   "droptime": int // Unix timestamp in seconds
+}
+```
+
+### Errors
+
+when there's an error the status code should be representative of the error code and there should be a json response that looks similar to the one below but tbh this api is kinda messy atm with garbage error handling. `TODO: add error handling that works`
+
+
+```
+{
+   "error": str // message about your error
+}
+```
