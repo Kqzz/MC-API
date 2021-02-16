@@ -86,7 +86,6 @@ exports.droptime = async (username) => {
   const $ = cheerio.load(resp.data);
 
   let time = $("#availability-time").attr("datetime");
-  console.log(time)
   if (time === undefined) {
     time = { error: `${username} is not dropping` };
   } else {
