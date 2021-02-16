@@ -4,12 +4,12 @@ const cheerio = require("cheerio");
 exports.userStats = async (identifier) => {
   data = {};
   // identifier can either uuid, uuid with dashes, or ign.
-  err_stuff = {}
+  err_stuff = {};
 
   const url = `https://namemc.com/profile/${identifier}`;
   const response = await axios.get(url).catch((err) => {
     if (err.response.status === 503) {
-      return {error: 'failed to connect to namemc'}
+      return { error: "failed to connect to namemc" };
     }
   });
 
