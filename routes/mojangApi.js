@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const mojang = require("./mojang");
-const namemc = require("./namemc");
-const { OptifineCape } = require("./other");
+const mojang = require("../utils/mojang");
+const namemc = require("../utils/namemc");
+const { OptifineCape } = require("../utils/other");
 
 router.get("/user/:username", async (req, res) => {
   let data = {};

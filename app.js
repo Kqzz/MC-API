@@ -3,9 +3,8 @@
 const express = require("express");
 const path = require("path");
 
-const mojang = require("./mojang");
-const mojangAPI = require("./mojangApi");
-const namemcAPI = require("./namemcApi");
+const mojangAPI = require("./routes/mojangApi");
+const namemcAPI = require("./routes/namemcApi");
 
 const app = express();
 const port = 3000;
