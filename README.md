@@ -134,3 +134,7 @@ when there's an error the status code should be representative of the error code
    "error": str // message about your error
 }
 ```
+
+## TODO
+
+- Error handling that works
