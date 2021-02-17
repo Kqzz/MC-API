@@ -142,3 +142,4 @@ when there's an error the status code should be representative of the error code
 
 - Error handling that works
 - Fix tests failing
+- Remove dupe data from `namemc` section of `/api/mojang/user/USERNAME`
