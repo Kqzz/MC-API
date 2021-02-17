@@ -141,3 +141,4 @@ when there's an error the status code should be representative of the error code
 ## TODO
 
 - Error handling that works
+- Fix tests failing
