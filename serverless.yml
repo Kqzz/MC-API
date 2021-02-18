@@ -1,0 +1,19 @@
+service: MC-API
+
+provider:
+ name: aws
+ runtime: nodejs12.x
+ stage: dev
+ region: us-east-1
+functions:
+  app:
+    handler: lambda.server
+    events: 
+      - http: 
+          path: /
+          method: ANY
+          cors: true
+      - http: 
+          path: /{proxy+}
+          method: ANY
+          cors: true
