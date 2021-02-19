@@ -1,6 +1,6 @@
 .vscode/
 .aws/
-
+serverless.yml
 
 # Logs
 logs
