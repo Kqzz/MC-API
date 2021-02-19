@@ -127,7 +127,7 @@ Get's the droptime of a username and returns the Unix timestamp of it.
 }
 ```
 
-### Errors
+## Errors
 
 when there's an error the status code should be representative of the error code and there should be a json response that looks similar to the one below but tbh this api is kinda messy atm with garbage error handling. `TODO: add error handling that works`
 
@@ -137,6 +137,17 @@ when there's an error the status code should be representative of the error code
    "error": str // message about your error
 }
 ```
+
+## Status Codes
+
+This table explains the http status codes returned from the API endpoints.
+
+| **Status Code** | **Explanation**                                                                                        |
+|-----------------|--------------------------------------------------------------------------------------------------------|
+| 200             | Success, data returned successfully.                                                                   |
+| 400             | Fail, something went wrong... (create an issue with as much info as you can provide when this happens) |
+| 404             | Resource not found, usually means the user you’re looking for doesn’t exist.                           |
+| 500             | Server error, again, please create an issue with as much info as possible. It really helps!            |
 
 ## TODO
 
