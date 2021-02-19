@@ -12,7 +12,7 @@ The MC API is meant to be easy to use, so I'll be documenting the **entire** res
 
 ### `/api/mojang/user/USERNAME`
 
-This is the main url path and provides information (solely from mojang) on a user. If you would like more information (namemc data and optifine info) then you can pass in the `optifine=true` and/or the `namemc=true` parameters (those are optional, if you don't provide them it will be the same as if you set both to false).
+This is the main url path and provides information (solely from mojang, unless otherwise specified) on a user. If you would like more information (namemc data and optifine info) then you can pass in the `optifine=true` and/or the `namemc=true` [url query strings](https://en.m.wikipedia.org/wiki/Query_string) (those are optional, if you don't provide them it will be the same as if you set both to false).
 
 ```
 {
