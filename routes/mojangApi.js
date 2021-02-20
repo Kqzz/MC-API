@@ -6,33 +6,22 @@ const namemc = require('../utils/namemc');
 const { OptifineCape } = require('../utils/optifine');
 
 router.get('/user/:username', async (req, res) => {
-  const data = {};
-
-  // if (req.params.username.length <= 16) {
-  //   const username_data = await mojang.usernameToUUID(req.params.username);
-  //   data.uuid = username_data.uuid
-  //   data.username = username_data.username
-  //   data.legacy = username_data.legacy
-  //   data.demo = username_data.demo
-  // } else {
-  //   const username_data = await mojang.usernameToUUID(req.params.username);
-  //   data.uuid = username_data.uuid
-  //   data.username = username_data.username
-  //   data.legacy = username_data.legacy
-  //   data.demo = username_data.demo
-  // }
+  let data = {};
 
   const use_namemc = req.query.namemc || false;
   const use_optifine = req.query.optifine || false;
 
-  const username_data = await mojang.usernameToUUID(req.params.username);
-  data.uuid = username_data.uuid;
-  data.username = username_data.username;
-  data.legacy = username_data.legacy;
-  data.demo = username_data.demo;
+  try {
+    const returned_data = await mojang.usernameToUUID(req.params.username);
+    data = Object.assign(data, returned_data);
+    console.log(returned_data);
+  }
+  catch (err) {
+    res.status(err.code).send(err);
+  }
 
   if (data.uuid === undefined) {
-    res.status(404).send({ error: 'no user with that username' });
+    res.status(404).send({ error: 'no user with that username', code: 404 });
     return;
   }
 

@@ -1,30 +1,5 @@
 const axios = require('axios');
 
-exports.usernameToUUID = async (username) => {
-  const response = await axios
-    .get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
-    .catch((err) => {
-      console.log(err);
-      //   response.data.id = undefined;
-    });
-  let legacy = false;
-  let demo = false;
-
-  if (response.data.legacy !== undefined) {
-    legacy = true;
-  }
-  if (response.data.demo !== undefined) {
-    demo = true;
-  }
-
-  return {
-    uuid: response.data.id,
-    username: response.data.name,
-    legacy,
-    demo
-  };
-};
-
 exports.nameHistory = async (uuid) => {
   const url = `https://api.mojang.com/user/profiles/${uuid}/names`;
   const data = await axios.get(url).catch((err) => {
@@ -70,25 +45,22 @@ exports.textures = async (uuid) => {
   return ret_data;
 };
 
+exports.usernameToUUID = (username) => new Promise((resolve, reject) => {
+  axios.get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
+    .then((response) => {
+      const legacy = response.data.legacy || false;
+      const demo = response.data.demo || false;
 
-exports.usernameToUUID = new Promise((resolve, reject) => {
-  const response = await axios
-    .get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
+      resolve({
+        uuid: response.data.id,
+        username: response.data.name,
+        legacy,
+        demo
+      });
+    })
     .catch((err) => {
       console.log(err);
       //   response.data.id = undefined;
+      reject({ error: 'something went wrong', code: 500 });
     });
-  let legacy = false;
-  let demo = false;
-
-  let legacy = response.data.legacy || false;
-  let demo = response.data.demo || false;
-
-
-  return {
-    uuid: response.data.id,
-    username: response.data.name,
-    legacy,
-    demo
-  };
-})
+});
