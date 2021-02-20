@@ -1,41 +1,38 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
-const mojang = require("../utils/mojang");
-const namemc = require("../utils/namemc");
-const { OptifineCape } = require("../utils/other");
+const mojang = require('../utils/mojang');
+const namemc = require('../utils/namemc');
+const { OptifineCape } = require('../utils/optifine');
 
-router.get("/user/:username", async (req, res) => {
-  let data = {};
+router.get('/user/:username', async (req, res) => {
+  const data = {};
 
-  if (req.params.username.length <= 16) {
-    const username_data = await mojang.usernameToUUID(req.params.username);
-    data.uuid = username_data.uuid
-    data.username = username_data.username
-    data.legacy = username_data.legacy
-    data.demo = username_data.demo 
-  } else {
-    const username_data = await mojang.usernameToUUID(req.params.username);
-    data.uuid = username_data.uuid
-    data.username = username_data.username
-    data.legacy = username_data.legacy
-    data.demo = username_data.demo 
-  }
+  // if (req.params.username.length <= 16) {
+  //   const username_data = await mojang.usernameToUUID(req.params.username);
+  //   data.uuid = username_data.uuid
+  //   data.username = username_data.username
+  //   data.legacy = username_data.legacy
+  //   data.demo = username_data.demo
+  // } else {
+  //   const username_data = await mojang.usernameToUUID(req.params.username);
+  //   data.uuid = username_data.uuid
+  //   data.username = username_data.username
+  //   data.legacy = username_data.legacy
+  //   data.demo = username_data.demo
+  // }
 
-  let use_namemc = req.query.namemc;
-  let use_optifine = req.query.optifine;
-
-  if (use_namemc === undefined) {
-    use_namemc = false;
-  }
+  const use_namemc = req.query.namemc || false;
+  const use_optifine = req.query.optifine || false;
 
   const username_data = await mojang.usernameToUUID(req.params.username);
-  data.uuid = username_data.uuid
-  data.username = username_data.username
-  data.legacy = username_data.legacy
-  data.demo = username_data.demo    
+  data.uuid = username_data.uuid;
+  data.username = username_data.username;
+  data.legacy = username_data.legacy;
+  data.demo = username_data.demo;
 
   if (data.uuid === undefined) {
-    res.status(404).send({ error: "no user with that username" });
+    res.status(404).send({ error: 'no user with that username' });
     return;
   }
 
@@ -49,15 +46,11 @@ router.get("/user/:username", async (req, res) => {
   }
 
   if (use_namemc) {
-    console.log("namemc was true!");
+    console.log('namemc was true!');
     data.namemc = await namemc.userStats(req.params.username);
   }
 
   res.status(200).send(data);
-});
-
-router.get("/", (req, res) => {
-  res.send("Hey");
 });
 
 module.exports = router;
