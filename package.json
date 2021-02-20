@@ -49,6 +49,18 @@
       ],
       "one-var": [
         "off"
+      ],
+      "linebreak-style": [
+        "off"
+      ],
+      "max-len": [
+        "off"
+      ],
+      "camelcase": [
+        "off"
+      ],
+      "no-console": [
+        "off"
       ]
     }
   }
