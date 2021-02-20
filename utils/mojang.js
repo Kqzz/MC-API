@@ -9,41 +9,46 @@ exports.nameHistory = async (uuid) => {
   return data.data;
 };
 
-exports.textures = async (uuid) => {
+exports.profile = (uuid) => new Promise((resolve, reject) => {
   const url = `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`;
-  const data = await axios.get(url).catch((err) => {
-    data.data = undefined;
-    console.log(err);
-  });
+  axios.get(url)
+    .then((data) => {
+      const ret_data = { skin: {}, cape: {} };
 
-  const ret_data = { skin: {}, cape: {} };
+      const decoded_value = JSON.parse(
+        Buffer.from(data.data.properties[0].value, 'base64').toString('utf-8')
+      );
 
-  const decoded_value = JSON.parse(
-    Buffer.from(data.data.properties[0].value, 'base64').toString('utf-8')
-  );
+      // if (decoded_value.textures.SKIN.metadata === undefined) {
+      //   ret_data.skin.custom = false;
+      //   ret_data.skin.slim = false;
+      // }
 
-  if (decoded_value.textures.SKIN.metadata === undefined) {
-    ret_data.skin.custom = false;
-    ret_data.skin.slim = false;
-  }
-  else {
-    ret_data.skin.custom = true;
-    ret_data.skin.slim = decoded_value.textures.SKIN.metadata.model === 'slim';
-  }
+      // eslint-disable-next-line no-multi-assign
+      ret_data.skin.slim = ret_data.skin.custom = (decoded_value.textures.SKIN.metadata === undefined)
 
-  ret_data.skin.url = decoded_value.textures.SKIN.url;
+      if (ret_data.skin.custom) {
+        ret_data.skin.slim = decoded_value.textures.SKIN.metadata.model === 'slim';
+      }
 
-  try {
-    ret_data.cape.url = decoded_value.textures.CAPE.url;
-    ret_data.cape.cape = true;
-  }
-  catch (_) {
-    ret_data.cape.cape = false;
-    ret_data.cape.url = '';
-  }
+      ret_data.skin.url = decoded_value.textures.SKIN.url;
 
-  return ret_data;
-};
+      try {
+        ret_data.cape.cape = true;
+        ret_data.cape.url = decoded_value.textures.CAPE.url;
+      }
+      catch (_) {
+        ret_data.cape.cape = false;
+        ret_data.cape.url = '';
+      }
+
+      resolve(ret_data);
+    })
+    .catch((err) => {
+      console.log(err);
+      reject({ error: err, code: 500 });
+    });
+});
 
 exports.usernameToUUID = (username) => new Promise((resolve, reject) => {
   axios.get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
