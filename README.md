@@ -8,8 +8,11 @@ This is a Minecraft API (similar to [aschon](https://api.ashcon.app/mojang/v2/us
 ## Sponsors
 
 Thanks to my sponsors:
-- Bre
-- Mub
+- [Mub](https://github.com/Mubbington)
+- [Bre](https://github.com/brehb)
+- [Tenscape](https://github.com/tenscape)
+- [Alfredo](https://github.com/Alfredo-Developer)
+- [Rayn](https://github.com/BabyMedley)
 
 ## Routes
 
