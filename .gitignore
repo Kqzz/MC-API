@@ -1,6 +1,9 @@
 .vscode/
 .aws/
 serverless.yml
+.idea/
+
+# For all you webstorm users ;-;
 
 # Logs
 logs
