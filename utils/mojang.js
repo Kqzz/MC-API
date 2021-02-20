@@ -69,3 +69,26 @@ exports.textures = async (uuid) => {
 
   return ret_data;
 };
+
+
+exports.usernameToUUID = new Promise((resolve, reject) => {
+  const response = await axios
+    .get(`https://api.mojang.com/users/profiles/minecraft/${username}`)
+    .catch((err) => {
+      console.log(err);
+      //   response.data.id = undefined;
+    });
+  let legacy = false;
+  let demo = false;
+
+  let legacy = response.data.legacy || false;
+  let demo = response.data.demo || false;
+
+
+  return {
+    uuid: response.data.id,
+    username: response.data.name,
+    legacy,
+    demo
+  };
+})
