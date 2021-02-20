@@ -5,6 +5,11 @@ This is a Minecraft API (similar to [aschon](https://api.ashcon.app/mojang/v2/us
 
 *NOTE: There is no public version available at the moment, but there will be in the near future.*
 
+## Sponsors
+
+Thanks to my sponsors:
+- Bre
+- Mub
 
 ## Routes
 
