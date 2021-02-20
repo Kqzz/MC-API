@@ -73,7 +73,7 @@ exports.userStats = async (identifier) => {
       data.skins.skin_ids.push($(value).attr('href').split('/').pop());
     });
 
-  for (let index = 0; index < data.skins.skin_ids.length; index++) {
+  for (let index = 0; index < data.skins.skin_ids.length; index += 1) {
     const element = data.skins.skin_ids[index];
 
     data.skins.texture_urls.push(`https://namemc.com/texture/${element}.png`);
