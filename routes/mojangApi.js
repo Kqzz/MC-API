@@ -24,7 +24,12 @@ router.get('/user/:username', async (req, res) => {
     return;
   }
 
-  data.username_history = await mojang.nameHistory(data.uuid);
+  try {
+    data.username_history = await mojang.nameHistory(data.uuid);
+  }
+  catch (err) {
+    res.status(err.code).send(err);
+  }
 
   try {
     data.textures = await mojang.profile(data.uuid); // This needs to replace that previous endpoint in the future
@@ -32,8 +37,6 @@ router.get('/user/:username', async (req, res) => {
   catch (err) {
     res.status(err.code).send(err);
   }
-
-  // data.created_at = await mojang.created(data.uuid, data.username) // Removed because mojang removed the api endpoint 😢
 
   if (use_optifine) {
     await OptifineCape(data.username)

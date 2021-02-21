@@ -1,19 +1,20 @@
 const axios = require('axios');
 
-exports.OptifineCape = async (username) => {
+exports.OptifineCape = (username) => new Promise((resolve, reject) => {
   const url = `http://s.optifine.net/capes/${username}.png`;
-  const ret = { has_cape: false, cape_url: '' }; // the user does have the cape
 
-  const resp = await axios.get(url).catch((err) => {
-    if (err.response.status === 404) {
-      return { status: 404 };
-    } // TODO: fix.
-  });
-
-  if (resp.status === 200) {
-    ret.has_cape = true;
-    ret.cape_url = `https://s.optifine.net/capes/${username}.png`;
-  }
-
-  return ret;
-};
+  axios.get(url)
+    .then((resp) => {
+      if (resp.status === 200) {
+        resolve({ has_cape: true, cape_url: `https://s.optifine.net/capes/${username}.png` });
+      }
+      else {
+        resolve({ has_cape: false, cape_url: '' });
+      }
+    })
+    .catch((err) => {
+      if (err.response.status === 404) {
+        reject({ error: `no user with ${username} name`, status: 404 });
+      }
+    });
+});
