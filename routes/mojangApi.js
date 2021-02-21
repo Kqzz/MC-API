@@ -29,8 +29,8 @@ router.get('/user/:username', async (req, res) => {
   try {
     data.textures = await mojang.profile(data.uuid); // This needs to replace that previous endpoint in the future
   }
-  catch (e) {
-    res.status(e.code).send(e);
+  catch (err) {
+    res.status(err.code).send(err);
   }
 
   // data.created_at = await mojang.created(data.uuid, data.username) // Removed because mojang removed the api endpoint 😢
