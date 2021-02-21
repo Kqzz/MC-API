@@ -36,7 +36,10 @@ router.get('/user/:username', async (req, res) => {
   // data.created_at = await mojang.created(data.uuid, data.username) // Removed because mojang removed the api endpoint 😢
 
   if (use_optifine) {
-    data.optifine = await OptifineCape(data.username);
+    await OptifineCape(data.username)
+      .then((returned_data) => {
+        data.optifine = returned_data;
+      });
   }
 
   if (use_namemc) {

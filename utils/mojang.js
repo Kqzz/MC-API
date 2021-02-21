@@ -1,14 +1,5 @@
 const axios = require('axios');
 
-exports.nameHistory = async (uuid) => {
-  const url = `https://api.mojang.com/user/profiles/${uuid}/names`;
-  const data = await axios.get(url).catch((err) => {
-    console.log(err);
-  });
-
-  return data.data;
-};
-
 exports.profile = (uuid) => new Promise((resolve, reject) => {
   const url = `https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`;
   axios.get(url)
@@ -25,7 +16,7 @@ exports.profile = (uuid) => new Promise((resolve, reject) => {
       // }
 
       // eslint-disable-next-line no-multi-assign
-      ret_data.skin.slim = ret_data.skin.custom = (decoded_value.textures.SKIN.metadata === undefined)
+      ret_data.skin.slim = ret_data.skin.custom = (decoded_value.textures.SKIN.metadata === undefined);
 
       if (ret_data.skin.custom) {
         ret_data.skin.slim = decoded_value.textures.SKIN.metadata.model === 'slim';
@@ -67,5 +58,17 @@ exports.usernameToUUID = (username) => new Promise((resolve, reject) => {
       console.log(err);
       //   response.data.id = undefined;
       reject({ error: 'something went wrong', code: 500 });
+    });
+});
+
+exports.nameHistory = (uuid) => new Promise((resolve, reject) => {
+  const url = `https://api.mojang.com/user/profiles/${uuid}/names`;
+  axios.get(url)
+    .then((resp) => {
+      resolve(resp.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      reject({ error: err, status: 500 });
     });
 });
