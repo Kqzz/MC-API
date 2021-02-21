@@ -43,7 +43,6 @@ router.get('/user/:username', async (req, res) => {
   }
 
   if (use_namemc) {
-    console.log('namemc was true!');
     data.namemc = await namemc.userStats(req.params.username);
   }
 
