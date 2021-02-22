@@ -5,7 +5,6 @@ const namemc = require('../utils/namemc');
 
 router.get('/user/:identifier', async (req, res) => {
   const data = await namemc.userStats(req.params.identifier);
-  console.log(data);
 
   res.send(data);
 });
