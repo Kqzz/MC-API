@@ -142,7 +142,8 @@ when there's an error the status code should be representative of the error code
 
 ```
 {
-   "error": str // message about your error
+   "error": str, // message about your error
+   "code": int // status code for the response 
 }
 ```
 
