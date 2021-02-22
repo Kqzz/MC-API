@@ -8,8 +8,8 @@ const { OptifineCape } = require('../utils/optifine');
 router.get('/user/:username', async (req, res) => {
   let data = {};
 
-  const use_namemc = req.query.namemc || false;
-  const use_optifine = req.query.optifine || false;
+  const use_namemc = req.query.namemc ?? false;
+  const use_optifine = req.query.optifine ?? false;
 
   try {
     const returned_data = await mojang.usernameToUUID(req.params.username);
