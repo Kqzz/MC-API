@@ -46,7 +46,12 @@ router.get('/user/:username', async (req, res) => {
   }
 
   if (use_namemc) {
-    data.namemc = await namemc.userStats(req.params.username);
+    try {
+      data.namemc = await namemc.userStats(req.params.username);
+    }
+    catch (err) {
+      res.status(err.status).send(err);
+    }
   }
 
   res.status(200).send(data);
