@@ -56,10 +56,10 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
           }
         });
 
-      data.skins = {};
-
-      data.skins.skin_ids = [];
-      data.skins.texture_urls = [];
+      data.skins = {
+        skin_ids: [],
+        texture_urls: []
+      };
 
       $(
         'body > main > div > div.col-lg-4.order-lg-1 > div:nth-child(3) > div.card-body.text-center'
