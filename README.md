@@ -1,13 +1,13 @@
-# MC API
-> written by Kqzz and contributors
+# Kqzz's MC API Docs
 
-This is a Minecraft API (similar to [aschon](https://api.ashcon.app/mojang/v2/user/Notch), but with more info) that provides information on a minecraft user. 
+> This is **not** and official mojang API! This is a Minecraft API (similar to [aschon](https://api.ashcon.app/mojang/v2/user/Notch), but with more info) that provides information on a minecraft user. 
 
-*NOTE: There is no public version available at the moment, but there will be in the near future.*
+> Written by [Kqzz](https://github.com/Kqzz) and [contributors](https://github.com/Kqzz/MC-API/graphs/contributors)
 
 ## Sponsors
 
-Thanks to my sponsors:
+Thanks to my sponsors who are helping to pay for hosting:
+
 - [Mub](https://github.com/Mubbington)
 - [Bre](https://github.com/brehb)
 - [Tenscape](https://github.com/tenscape)
@@ -18,16 +18,18 @@ Thanks to my sponsors:
 
 The MC API is meant to be easy to use, so I'll be documenting the **entire** responses of all the routes here.
 
+!> These docs are garbage 🗑️
+
 ### `/api/mojang/user/USERNAME`
 
 This is the main url path and provides information (solely from mojang, unless otherwise specified) on a user. If you would like more information (namemc data and optifine info) then you can pass in the `optifine=true` and/or the `namemc=true` [url query strings](https://en.m.wikipedia.org/wiki/Query_string) (those are optional, if you don't provide them it will be the same as if you set both to false).
 
-```
+```json
 {
    "uuid": str,  // The specified user's UUID
    "username": str,  // The specified user's username (may differ from url parameter in capitalization and will always be the exact username the specified user has)
-   "legacy": false,  // If the specified user is a legacy account
-   "demo": false,  // If the specified user is a demo account
+   "legacy": bool,  // If the specified user is a legacy account
+   "demo": bool,  // If the specified user is a demo account
    "username_history":[
       {
          "name":str // The original name of the account
@@ -157,9 +159,3 @@ This table explains the http status codes returned from the API endpoints.
 | 400             | Fail, something went wrong... (create an issue with as much info as you can provide when this happens) |
 | 404             | Resource not found, usually means the user you’re looking for doesn’t exist.                           |
 | 500             | Server error, again, please create an issue with as much info as possible. It really helps!            |
-
-## TODO
-
-- Error handling that works
-- Fix tests failing
-- Remove dupe data from `namemc` section of `/api/mojang/user/USERNAME`
