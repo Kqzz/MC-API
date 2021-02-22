@@ -16,11 +16,12 @@ router.get('/user/:username', async (req, res) => {
     data = Object.assign(data, returned_data);
   }
   catch (err) {
-    res.status(err.code).send(err);
+    res.status(err.status).send(err);
+    return;
   }
 
   if (data.uuid === undefined) {
-    res.status(404).send({ error: 'no user with that username', code: 404 });
+    res.status(404).send({ error: 'no user with that username', status: 404 });
     return;
   }
 
@@ -28,14 +29,16 @@ router.get('/user/:username', async (req, res) => {
     data.username_history = await mojang.nameHistory(data.uuid);
   }
   catch (err) {
-    res.status(err.code).send(err);
+    res.status(err.status).send(err);
+    return;
   }
 
   try {
     data.textures = await mojang.profile(data.uuid); // This needs to replace that previous endpoint in the future
   }
   catch (err) {
-    res.status(err.code).send(err);
+    res.status(err.status).send(err);
+    return;
   }
 
   if (use_optifine) {

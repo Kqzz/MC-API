@@ -15,14 +15,23 @@ exports.profile = (uuid) => new Promise((resolve, reject) => {
       //   ret_data.skin.slim = false;
       // }
 
-      // eslint-disable-next-line no-multi-assign
-      ret_data.skin.slim = ret_data.skin.custom = (decoded_value.textures.SKIN.metadata === undefined);
+      // ret_data.skin.slim = ret_data.skin.custom = (decoded_value.textures.SKIN.metadata !== undefined);
 
-      if (ret_data.skin.custom) {
-        ret_data.skin.slim = decoded_value.textures.SKIN.metadata.model === 'slim';
-      }
+      console.log(decoded_value.textures.SKIN.metadata);
 
       ret_data.skin.url = decoded_value.textures.SKIN.url;
+
+      if (decoded_value.textures.SKIN.metadata !== undefined) {
+        ret_data.skin.slim = decoded_value.textures.SKIN.metadata.model === 'slim';
+      }
+      else {
+        ret_data.skin.slim = false;
+      }
+
+      ret_data.skin.custom = [
+        'https://textures.minecraft.net/texture/3b60a1f6d562f52aaebbf1434f1de147933a3affe0e764fa49ea057536623cd3',
+        'https://textures.minecraft.net/texture/1a4af718455d4aab528e7a61f86fa25e6a369d1768dcb13f7df319a713eb810b'
+      ].includes(ret_data.skin.url);
 
       try {
         ret_data.cape.cape = true;
@@ -37,7 +46,7 @@ exports.profile = (uuid) => new Promise((resolve, reject) => {
     })
     .catch((err) => {
       console.log(err);
-      reject({ error: err, code: 500 });
+      reject({ error: err, status: 500 });
     });
 });
 
@@ -57,7 +66,7 @@ exports.usernameToUUID = (username) => new Promise((resolve, reject) => {
     .catch((err) => {
       console.log(err);
       //   response.data.id = undefined;
-      reject({ error: 'something went wrong', code: 500 });
+      reject({ error: 'something went wrong', status: 500 });
     });
 });
 
