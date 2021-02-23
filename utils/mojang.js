@@ -17,8 +17,6 @@ exports.profile = (uuid) => new Promise((resolve, reject) => {
 
       // ret_data.skin.slim = ret_data.skin.custom = (decoded_value.textures.SKIN.metadata !== undefined);
 
-      console.log(decoded_value.textures.SKIN.metadata);
-
       ret_data.skin.url = decoded_value.textures.SKIN.url;
 
       if (decoded_value.textures.SKIN.metadata !== undefined) {
