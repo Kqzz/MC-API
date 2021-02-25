@@ -20,7 +20,7 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
         'body > main > div > div.col-lg-8.order-lg-2 > div:nth-child(5) > div.card-body.py-1 > div:nth-child(1) > div.col-auto'
       ).text();
 
-      if (data.location === 'Accounts') {
+      if (data.location === 'Accounts' || data.location === '\nEmerald\n') {
         data.location = '';
       }
 
