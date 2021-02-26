@@ -4,7 +4,7 @@
   "description": "Minecraft API made by kqzz :D",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.local.js",
+    "start": "nodemon --trace-warnings --unhandled-rejections=strict app.local.js",
     "test": "jest",
     "deploy": "npx serverless deploy --verbose"
   },
@@ -24,8 +24,7 @@
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
-    "serverless": "^2.25.2",
-    "serverless-domain-manager": "^5.1.0"
+    "serverless": "^2.25.2"
   },
   "eslintConfig": {
     "extends": "airbnb-base",
