@@ -41,20 +41,23 @@ router.get('/user/:username', async (req, res) => {
     return;
   }
 
-  if (use_optifine) {
-    await OptifineCape(data.username)
-      .then((returned_data) => {
-        data.optifine = returned_data;
-      });
+  try {
+    if (use_optifine) {
+      data.optifine = await OptifineCape(data.username);
+    }
+  }
+  catch (err) {
+    res.status(err.status).send(err);
+    return;
   }
 
-  if (use_namemc) {
-    try {
+  try {
+    if (use_namemc) {
       data.namemc = await namemc.userStats(req.params.username);
     }
-    catch (err) {
-      res.status(err.status).send(err);
-    }
+  }
+  catch (err) {
+    res.status(err.status).send(err);
   }
 
   res.status(200).send(data);

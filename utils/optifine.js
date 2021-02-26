@@ -6,7 +6,7 @@ exports.OptifineCape = (username) => new Promise((resolve, reject) => {
   axios.get(url)
     .then((resp) => {
       if (resp.status === 200) {
-        resolve({ has_cape: true, cape_url: `https://s.optifine.net/capes/${username}.png` });
+        resolve({ has_cape: true, cape_url: `https://optifine.net/capes/${username}.png` });
       }
       else {
         resolve({ has_cape: false, cape_url: '' });
@@ -14,7 +14,10 @@ exports.OptifineCape = (username) => new Promise((resolve, reject) => {
     })
     .catch((err) => {
       if (err.response.status === 404) {
-        reject({ error: `no user with ${username} name`, status: 404 });
+        resolve({ error: `no cape on ${username}`, status: 404 });
+      }
+      else {
+        reject({ error: err, status: 500 });
       }
     });
 });
