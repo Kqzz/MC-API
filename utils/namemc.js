@@ -106,3 +106,62 @@ exports.droptime = (username) => new Promise((resolve, reject) => {
       reject({ error: err, status: 500 });
     });
 });
+
+exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => new Promise((resolve, reject) => {
+  let operator = null;
+  switch (length_op) {
+    case '<':
+      operator = 'le';
+      break;
+    case '=':
+      operator = 'eq';
+      break;
+    case '>':
+      operator = 'ge';
+      break;
+    default:
+      operator = '';
+  }
+  const url = `https://namemc.com/minecraft-names?sort=&length_op=${operator}length=${length}&lang=${lang}&searches=${searches}`;
+  console.log(url);
+  axios.get(url)
+    .then((resp) => {
+      const ret = [];
+      const already_checked = [];
+      const $ = cheerio.load(resp.data);
+      $('.p-0')
+        .find('div')
+        .each((i, v) => {
+          let name = $(v).find('a').attr('href');
+          if (name !== undefined) {
+            name = name.replace('/name/', '');
+            if (!already_checked.includes(name)) {
+              const to_push = {};
+
+              to_push.name = name.replace('/name/', '');
+              to_push.droptime = Date.parse(
+                $(v).find('time').attr('datetime')
+              ) / 1000;
+
+              to_push.searches = $(v).find(
+                'div .col-auto.col-md.order-md-3.text-right.tabular'
+              ).text();
+
+              if (to_push.searches === '‒') {
+                to_push.searches = 0;
+              }
+              else {
+                to_push.searches = parseInt(to_push.searches, 10);
+              }
+              ret.push(to_push);
+              already_checked.push(name);
+            }
+          }
+        });
+      resolve(ret);
+    })
+    .catch((err) => {
+      reject({ error: err, status: 500 });
+    });
+});
+// https://namemc.com/minecraft-names?sort=asc&length_op=le&length=3&lang=&searches=123

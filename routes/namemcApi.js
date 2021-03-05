@@ -30,4 +30,22 @@ router.get('/droptime/:username', async (req, res) => {
   res.status(resp_status).send(data);
 });
 
+router.get('/upcoming', async (req, res) => {
+  let data = {};
+
+  const searches = req.query.searches || '';
+  const op = req.query.op || '';
+  const lang = req.query.lang || '';
+  const length = req.query.length || '';
+
+  try {
+    data = await namemc.upcoming(op, length, lang, searches);
+  }
+  catch (err) {
+    console.log(err);
+    res.status(err.status).send(err);
+  }
+  res.send(data);
+});
+
 module.exports = router;
