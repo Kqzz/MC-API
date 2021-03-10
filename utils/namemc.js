@@ -144,7 +144,7 @@ exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => ne
               ) / 1000;
 
               to_push.searches = $(v).find(
-                'div .col-auto.col-md.order-md-3.text-right.tabular'
+                'div .col-auto.col-lg.order-lg-3'
               ).text();
 
               if (to_push.searches === '‒') {
