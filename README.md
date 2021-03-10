@@ -4,15 +4,7 @@
 
 > Written by [Kqzz](https://github.com/Kqzz) and [contributors](https://github.com/Kqzz/MC-API/graphs/contributors)
 
-## Sponsors
-
-Thanks to my sponsors who are helping to pay for hosting:
-
-- [Mub](https://github.com/Mubbington)
-- [Bre](https://github.com/brehb)
-- [Tenscape](https://github.com/tenscape)
-- [Alfredo](https://github.com/Alfredo-Developer)
-- [Rayn](https://github.com/BabyMedley)
+**The base url is [https://api.kqzz.me](https://api.kqzz.me)**
 
 ## Routes
 
@@ -98,7 +90,7 @@ This is the main url path and provides information (solely from mojang, unless o
 To be honest, this route is fairly useless. I recommend using the Mojang route and passing in the `namemc=true` [url query string](https://en.wikipedia.org/wiki/Query_string).
 
 ```
-{ // ONLY PRESENT IF `namemc=true` is passed as a url query string (https://en.wikipedia.org/wiki/Query_string)
+{
       "username": str,  // username of the account (it's a duplicate of the prev data) // TODO: remove dupe data if it's not a /api/namec url
       "uuid":str,  // uuid of the specified account
       "location":str,  // location of the specified account https://imgur.com/a/D0jgisi
@@ -135,6 +127,20 @@ Get's the droptime of a username and returns the Unix timestamp of it.
 {
    "droptime": int // Unix timestamp in seconds
 }
+```
+
+### `/api/namemc/upcoming`
+
+This endpoint returns a list of the next names dropping. While I only show one example that json object repeats itself 50 times on the next 50 names.
+
+```
+[
+   {
+     "name": str
+     "droptime": int, // Unix timestamp
+     "searches": int // namemc searches
+   }
+]
 ```
 
 ## Errors
