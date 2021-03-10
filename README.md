@@ -3,7 +3,7 @@
 
 This is a Minecraft API (similar to [aschon](https://api.ashcon.app/mojang/v2/user/Notch), but with more info) that provides information on a minecraft user. 
 
-*NOTE: There is no public version available at the moment, but there will be in the near future.*
+**Feel free to try the api out at** [api.kqzz.me](https://api.kqzz.me/)!
 
 ## Sponsors
 
