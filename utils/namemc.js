@@ -1,6 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+function textureUrl(hash) {
+  return `https://texture.namemc.com/${hash[0]}${hash[1]}/${hash[2]}${hash[3]}/${hash}.png`;
+}
+
 exports.userStats = (identifier) => new Promise((resolve, reject) => {
   // identifier can either uuid, uuid with dashes, or ign.
 
@@ -13,11 +17,15 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
       data.username = $('body > main > h1').text();
 
       data.uuid = $(
-        'body > main > div > div.col-lg-8.order-lg-2 > div:nth-child(1) > div.card-body.py-1 > div:nth-child(2) > div.col-12.order-md-2.col-md > samp'
+        '.col-md-7 > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > samp:nth-child(1)'
+      ).text();
+
+      data.uuid_dashes = $(
+        'div.align-items-center:nth-child(1) > div:nth-child(3) > samp:nth-child(1)'
       ).text();
 
       data.location = $(
-        'body > main > div > div.col-lg-8.order-lg-2 > div:nth-child(5) > div.card-body.py-1 > div:nth-child(1) > div.col-auto'
+        '.col-md-7 > div:nth-child(5) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2)'
       ).text();
 
       if (data.location === 'Accounts' || data.location === '\nEmerald\n') {
@@ -26,7 +34,7 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
 
       data.views = parseInt(
         $(
-          'body > main > div > div.col-lg-8.order-lg-2 > div:nth-child(1) > div.card-body.py-1 > div:nth-child(4) > div.col-auto'
+          '.col-md-7 > div:nth-child(1) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2)'
         )
           .text()
           .split(' ')[0],
@@ -36,7 +44,7 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
       data.accounts = {};
 
       $(
-        'body > main > div > div.col-lg-8.order-lg-2 > div:nth-child(5) > div.card-body.py-1 > div.row.no-gutters.align-items-center > div.col.text-right.text-md-left'
+        '.text-lg-left'
       )
         .find('a')
         .each((i, v) => {
@@ -62,7 +70,7 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
       };
 
       $(
-        'body > main > div > div.col-lg-4.order-lg-1 > div:nth-child(3) > div.card-body.text-center'
+        'div.card:nth-child(3) > div:nth-child(2)'
       )
         .find('a')
         .each((index, value) => {
@@ -75,10 +83,21 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
         data.skins.texture_urls.push(`https://namemc.com/texture/${element}.png`);
       }
 
+      data.optifine_cape = $(
+        '.cape-2d'
+      ).attr('data-cape-hash');
+
+      if (data.optifine_cape === undefined) {
+        data.optifine_cape = null;
+      }
+      else {
+        data.optifine_cape = textureUrl(data.optifine_cape);
+      }
+
       resolve(data);
     })
     .catch((err) => {
-      if (err.response.status === 503) {
+      if (err.response !== undefined && err.response.status === 503) {
         reject({ error: 'failed to connect to namemc', status: 500 });
       }
       else {
