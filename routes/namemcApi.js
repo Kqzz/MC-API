@@ -48,10 +48,11 @@ router.get('/upcoming', async (req, res) => {
   res.send(data);
 });
 
-// router.get('/searches/:username', async (req, res) => {
-//   const data = {};
-//   data.searches = await namemc.searches(req.params.username);
-//   res.send(data);
-// });
+router.get('/searches/:username', async (req, res) => {
+  const data = {};
+  data.username = req.params.username;
+  data.searches = await namemc.searches(req.params.username);
+  res.send(data);
+});
 
 module.exports = router;

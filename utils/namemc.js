@@ -185,10 +185,21 @@ exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => ne
 });
 // https://namemc.com/minecraft-names?sort=asc&length_op=le&length=3&lang=&searches=123
 
-// exports.searches = (username) => new Promise((resolve, reject) => {
-//   const url = `https://namemc.com/search?q=${username}`;
-//   axios.get('https://namemc.com/search?q=python')
-//     .then((resp) => {
-
-//     });
-// });
+exports.searches = (username) => new Promise((resolve, reject) => {
+  const url = `https://namemc.com/search?q=${username}`;
+  axios.get(url)
+    .then((resp) => {
+      const $ = cheerio.load(resp.data);
+      const searches = parseInt(
+        $(
+          '.tabular'
+        ).text().split(' ')[0],
+        10
+      );
+      resolve(searches);
+    })
+    .catch((err) => {
+      console.log(err);
+      reject({ error: err, status: 500 });
+    });
+});
