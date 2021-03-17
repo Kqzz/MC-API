@@ -1,6 +1,6 @@
 {
   "name": "mc-api",
-  "version": "1.2",
+  "version": "1.2.1",
   "description": "Minecraft API made by kqzz :D",
   "main": "index.js",
   "scripts": {

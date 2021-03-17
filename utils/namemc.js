@@ -184,3 +184,11 @@ exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => ne
     });
 });
 // https://namemc.com/minecraft-names?sort=asc&length_op=le&length=3&lang=&searches=123
+
+// exports.searches = (username) => new Promise((resolve, reject) => {
+//   const url = `https://namemc.com/search?q=${username}`;
+//   axios.get('https://namemc.com/search?q=python')
+//     .then((resp) => {
+
+//     });
+// });

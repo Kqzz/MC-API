@@ -14,7 +14,7 @@ exports.OptifineCape = (username) => new Promise((resolve, reject) => {
     })
     .catch((err) => {
       if (err.response.status === 404) {
-        resolve({ error: `no cape on ${username}`, status: 404 });
+        resolve({ has_cape: false, cape_url: '' });
       }
       else {
         reject({ error: err, status: 500 });
