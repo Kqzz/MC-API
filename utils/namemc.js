@@ -153,7 +153,8 @@ exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => ne
         .each((i, v) => {
           let name = $(v).find('a').attr('href');
           if (name !== undefined) {
-            name = name.replace('/name/', '');
+            name = name.split('q=');
+            name = name[name.length - 1];
             if (!already_checked.includes(name)) {
               const to_push = {};
 
@@ -202,4 +203,8 @@ exports.searches = (username) => new Promise((resolve, reject) => {
       console.log(err);
       reject({ error: err, status: 500 });
     });
+});
+
+exports.skinHash = (hash) => new Promise((resolve) => {
+  resolve(`https://texture.namemc.com/${hash[0]}${hash[1]}/${hash[2]}${hash[3]}/${hash}.png`);
 });
