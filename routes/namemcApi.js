@@ -30,7 +30,12 @@ router.get('/droptime/:username', async (req, res) => {
 
 router.get('/upcoming', async (req, res) => {
   try {
-    const { searches, op, lang, length } = req.query;
+    const {
+      searches,
+      op,
+      lang,
+      length
+    } = req.query;
 
     // const searches = req.query.searches || ''
     // const op = req.query.op || ''
