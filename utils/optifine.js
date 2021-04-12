@@ -21,4 +21,3 @@ exports.OptifineCape = (username) => new Promise((resolve, reject) => {
       }
     });
 });
-

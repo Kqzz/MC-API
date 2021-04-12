@@ -141,8 +141,9 @@ exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => ne
     default:
       operator = '';
   }
-  const url = `https://namemc.com/minecraft-names?sort=&length_op=${operator}length=${length}&lang=${lang}&searches=${searches}`;
-  console.log(url);
+
+  const url = `https://namemc.com/minecraft-names?sort=&length_op=${operator}&length=${length}&lang=${lang}&searches=${searches}`;
+  // console.log(url);
   axios.get(url)
     .then((resp) => {
       const ret = [];
