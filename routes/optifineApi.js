@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
-const optifine = require('../utils/optifine');
+const optifine = require("../utils/optifine");
 
-router.get('/cape/:username', async (req, res) => {
+router.get("/cape/:username", async (req, res) => {
   try {
     const data = await optifine.OptifineCape(req.params.username);
     res.status(200).send(data);

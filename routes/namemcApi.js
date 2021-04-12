@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
-const namemc = require('../utils/namemc');
+const namemc = require("../utils/namemc");
 
-router.get('/user/:identifier', async (req, res) => {
+router.get("/user/:identifier", async (req, res) => {
   try {
     res.send(await namemc.userStats(req.params.identifier));
   } catch (err) {
@@ -11,7 +11,7 @@ router.get('/user/:identifier', async (req, res) => {
   }
 });
 
-router.get('/droptime/:username', async (req, res) => {
+router.get("/droptime/:username", async (req, res) => {
   try {
     const data = await namemc.droptime(req.params.username);
 
@@ -26,9 +26,9 @@ router.get('/droptime/:username', async (req, res) => {
   }
 });
 
-router.get('/upcoming', async (req, res) => {
+router.get("/upcoming", async (req, res) => {
   try {
-    const {searches, op, lang, length} = req.query;
+    const { searches, op, lang, length } = req.query;
 
     // const searches = req.query.searches || ''
     // const op = req.query.op || ''
@@ -44,7 +44,7 @@ router.get('/upcoming', async (req, res) => {
   }
 });
 
-router.get('/searches/:username', async (req, res) => {
+router.get("/searches/:username", async (req, res) => {
   const data = {};
   data.username = req.params.username;
   data.searches = await namemc.searches(req.params.username);
