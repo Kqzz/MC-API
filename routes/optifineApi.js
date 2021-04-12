@@ -7,8 +7,7 @@ router.get('/cape/:username', async (req, res) => {
   try {
     const data = await optifine.OptifineCape(req.params.username);
     res.status(200).send(data);
-  }
-  catch (err) {
+  } catch (err) {
     if (err) {
       res.status(err.status).send(err);
     }

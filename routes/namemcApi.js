@@ -6,8 +6,7 @@ const namemc = require('../utils/namemc');
 router.get('/user/:identifier', async (req, res) => {
   try {
     res.send(await namemc.userStats(req.params.identifier));
-  }
-  catch (err) {
+  } catch (err) {
     res.status(err.status).send(err);
   }
 });
@@ -22,20 +21,14 @@ router.get('/droptime/:username', async (req, res) => {
     }
 
     res.status(resp_status).send(data);
-  }
-  catch (err) {
+  } catch (err) {
     res.status(err.status).send(err);
   }
 });
 
 router.get('/upcoming', async (req, res) => {
   try {
-    const {
-      searches,
-      op,
-      lang,
-      length
-    } = req.query;
+    const {searches, op, lang, length} = req.query;
 
     // const searches = req.query.searches || ''
     // const op = req.query.op || ''
@@ -45,8 +38,7 @@ router.get('/upcoming', async (req, res) => {
     const data = await namemc.upcoming(op, length, lang, searches);
 
     res.send(data);
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err);
     res.status(err.status).send(err);
   }
