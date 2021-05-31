@@ -5,7 +5,7 @@ const namemc = require('../utils/namemc');
 
 router.get('/user/:identifier', async (req, res) => {
   try {
-    res.status(200).send(await namemc.userStats(req.params.identifier));
+    res.send(await namemc.userStats(req.params.identifier));
   }
   catch (err) {
 	console.log(err)
@@ -14,39 +14,43 @@ router.get('/user/:identifier', async (req, res) => {
 });
 
 router.get('/droptime/:username', async (req, res) => {
-  let data = {};
   try {
-    data = await namemc.droptime(req.params.username);
+    const data = await namemc.droptime(req.params.username);
+
+    let resp_status = 200;
+    if (data.error !== undefined) {
+      resp_status = 400;
+    }
+
+    res.status(resp_status).send(data);
   }
   catch (err) {
     res.status(err.status).send(err);
-    return;
   }
-
-  let resp_status = 200;
-  if (data.error !== undefined) {
-    resp_status = 400;
-  }
-
-  res.status(resp_status).send(data);
 });
 
 router.get('/upcoming', async (req, res) => {
-  let data = {};
-
-  const searches = req.query.searches || '';
-  const op = req.query.op || '';
-  const lang = req.query.lang || '';
-  const length = req.query.length || '';
-
   try {
-    data = await namemc.upcoming(op, length, lang, searches);
+    const {
+      searches,
+      op,
+      lang,
+      length
+    } = req.query;
+
+    // const searches = req.query.searches || ''
+    // const op = req.query.op || ''
+    // const lang = req.query.lang || ''
+    // const length = req.query.length || ''
+
+    const data = await namemc.upcoming(op, length, lang, searches);
+
+    res.send(data);
   }
   catch (err) {
     console.log(err);
     res.status(err.status).send(err);
   }
-  res.send(data);
 });
 
 router.get('/searches/:username', async (req, res) => {
