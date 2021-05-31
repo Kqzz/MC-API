@@ -34,7 +34,7 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
 
       data.views = parseInt(
         $(
-          '.col-md-7 > div:nth-child(1) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2)'
+          'div.col-md-6:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2)'
         )
           .text()
           .split(' ')[0],
@@ -48,12 +48,14 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
       )
         .find('a')
         .each((i, v) => {
-          const acc_type = $(v)
+          let acc_type = $(v)
             .find('img')
-            .attr('src')
-            .split('/')
-            .pop()
-            .split('.')[0];
+            .attr('src');
+		  if (acc_type !== undefined) {
+			  acc_type = acc_type.split('/').pop().split('.')[0];
+		  } else {
+			  return;
+		  }
           const link_or_void = $(v).attr('href');
           // eslint-disable-next-line no-script-url
           if (link_or_void === 'javascript:void(0)') {
@@ -141,7 +143,7 @@ exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => ne
     default:
       operator = '';
   }
-  const url = `https://namemc.com/minecraft-names?sort=&length_op=${operator}length=${length}&lang=${lang}&searches=${searches}`;
+  const url = `https://namemc.com/minecraft-names?sort=&length_op=${operator}&length=${length}&lang=${lang}&searches=${searches}`;
   console.log(url);
   axios.get(url)
     .then((resp) => {

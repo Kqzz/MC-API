@@ -8,6 +8,7 @@ router.get('/user/:identifier', async (req, res) => {
     res.status(200).send(await namemc.userStats(req.params.identifier));
   }
   catch (err) {
+	console.log(err)
     res.status(err.status).send(err);
   }
 });
