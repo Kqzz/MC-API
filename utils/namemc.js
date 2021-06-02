@@ -17,15 +17,20 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
       data.username = $('body > main > h1').text();
 
       data.uuid = $(
-        '.col-md-7 > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > samp:nth-child(1)'
+        'div.col-md-6:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > samp:nth-child(1)'
       ).text();
 
       data.uuid_dashes = $(
         'div.align-items-center:nth-child(1) > div:nth-child(3) > samp:nth-child(1)'
       ).text();
 
+	  data.link = $(
+		'div.col-md-6:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(3) > a:nth-child(1)'
+	  ).attr('href')
+
+	  
       data.location = $(
-        '.col-md-7 > div:nth-child(5) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2)'
+        'div.col-md-6:nth-child(1) > div:nth-child(5) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2)'
       ).text();
 
       if (data.location === 'Accounts' || data.location === '\nEmerald\n') {
