@@ -9,7 +9,7 @@ router.get('/user/:identifier', async (req, res) => {
   }
   catch (err) {
 	console.log(err)
-    res.status(err.status).send(err);
+	res.status(400).send({error: "Tell Kqzz to check logs"})
   }
 });
 
@@ -25,7 +25,7 @@ router.get('/droptime/:username', async (req, res) => {
     res.status(resp_status).send(data);
   }
   catch (err) {
-    res.status(err.status).send(err);
+	res.status(400).send({error: "CHECK LOGS KQZZ"})
   }
 });
 
@@ -48,8 +48,7 @@ router.get('/upcoming', async (req, res) => {
     res.send(data);
   }
   catch (err) {
-    console.log(err);
-    res.status(err.status).send(err);
+    res.status(400).send({error: "CHECK LOGS KQZZ"})
   }
 });
 
