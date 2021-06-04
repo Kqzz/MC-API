@@ -1,6 +1,8 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const namemcUrl = 'https://namemc.com';
+
 function textureUrl(hash) {
   return `https://texture.namemc.com/${hash[0]}${hash[1]}/${hash[2]}${hash[3]}/${hash}.png`;
 }
@@ -8,8 +10,8 @@ function textureUrl(hash) {
 exports.userStats = (identifier) => new Promise((resolve, reject) => {
   // identifier can either uuid, uuid with dashes, or ign.
 
-  const url = `https://namemc.com/profile/${identifier}`;
-  axios.get(url)
+  const url = `${namemcUrl}/profile/${identifier}`;
+  axios.get(url, {headers: {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0'}})
     .then((response) => {
       const data = {};
       const $ = cheerio.load(response.data);
@@ -114,7 +116,7 @@ exports.userStats = (identifier) => new Promise((resolve, reject) => {
 });
 
 exports.droptime = (username) => new Promise((resolve, reject) => {
-  const url = `https://namemc.com/name/${username}`;
+  const url = `${namemcUrl}/name/${username}`;
   axios.get(url)
     .then((resp) => {
       const $ = cheerio.load(resp.data);
@@ -148,7 +150,7 @@ exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => ne
     default:
       operator = '';
   }
-  const url = `https://namemc.com/minecraft-names?sort=&length_op=${operator}&length=${length}&lang=${lang}&searches=${searches}`;
+  const url = `${namemcUrl}/minecraft-names?sort=&length_op=${operator}&length=${length}&lang=${lang}&searches=${searches}`;
   console.log(url);
   axios.get(url)
     .then((resp) => {
@@ -194,7 +196,7 @@ exports.upcoming = (length_op = '', length = '', lang = '', searches = '') => ne
 // https://namemc.com/minecraft-names?sort=asc&length_op=le&length=3&lang=&searches=123
 
 exports.searches = (username) => new Promise((resolve, reject) => {
-  const url = `https://namemc.com/search?q=${username}`;
+  const url = `${namemcUrl}/search?q=${username}`;
   axios.get(url)
     .then((resp) => {
       const $ = cheerio.load(resp.data);
