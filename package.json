@@ -11,7 +11,7 @@
   "author": "Kqzz",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.1",
     "serverless-http": "^2.7.0"
