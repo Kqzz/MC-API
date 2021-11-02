@@ -1,3 +1,5 @@
+# NOW BROKEN + DEPRECATED
+
 # MC API
 > written by Kqzz and contributors
 
